@@ -464,7 +464,7 @@
     <!-- Menu desktop -->
     <div class="collapse navbar-collapse justify-content-center d-none d-lg-flex" id="navbarMenu">
       <ul class="navbar-nav mb-2 mb-lg-0 gap-4">
-        <li class="nav-item"><a class="nav-link text-dark" href="index.html">Ballina</a></li>
+        <li class="nav-item"><a class="nav-link text-dark" href="Index.html">Ballina</a></li>
         <li class="nav-item"><a class="nav-link text-dark" href="rrethnesh.html">Rreth nesh</a></li>
         <li class="nav-item"><a class="nav-link text-dark" href="Test.html">Shërbimet</a></li>
         <li class="nav-item"><a class="nav-link text-dark" href="Ballina.html">Syzet dhe markat</a></li>
@@ -540,10 +540,6 @@
 </section>
 
 
-
-  <!-- Pjesa tjetër e faqes... -->
-
-
 <!-- Google Font -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
 
@@ -569,7 +565,6 @@
   </div>
 </section>
 
-
 <style>
 .vizion-section {
   font-family: 'Poppins', sans-serif;
@@ -578,7 +573,7 @@
 }
 
 .vizion-section .container {
-  max-width: 1200px; /* e ngushton përmbajtjen */
+  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -639,6 +634,7 @@
     left: 50px !important;
     top: 0 !important;
     transform: rotate(11.99deg) !important;
+    opacity: 1 !important;
   }
 
   .second-img {
@@ -647,113 +643,69 @@
     left: 120px !important;
     top: 100px !important;
     transform: rotate(-13.47deg) !important;
+    opacity: 1 !important;
+  }
+
+  /* Heqim animacionet në mobile */
+  .text-content,
+  .image-content {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
   }
 }
 
-
-
-
-
-
-/* Animacioni i shfaqjes */
-.text-content,
-.image-content {
-  opacity: 0;
-  transition: all 0.8s ease;
-}
-
-.text-content {
-  transform: translateX(-100px);
-}
-
-.image-content {
-  transform: translateX(100px);
-}
-
-.text-content.show,
-.image-content.show {
-  opacity: 1;
-  transform: translateX(0);
-}
-/* Fillimisht i fshehim të dy fotot me pozicion të ndryshëm */
-.first-img,
-.second-img {
-  opacity: 0;
-  transition: all 0.9s ease;
-}
-
-/* Foto e parë vjen nga lart */
-.first-img {
-  transform: translateY(-100px) rotate(11.99deg);
-}
-
-/* Foto e dytë vjen nga e djathta */
-.second-img {
-  transform: translateX(100px) rotate(-13.47deg);
-}
-
-/* Kur aktivizohet animacioni */
-.image-content.show .first-img,
-.image-content.show .second-img {
-  opacity: 1;
-}
-
-/* Foto e parë kthehet në pozicion normal */
-.image-content.show .first-img {
-  transform: translateY(0) rotate(11.99deg);
-}
-
-/* Foto e dytë kthehet në pozicion normal */
-.image-content.show .second-img {
-  transform: translateX(0) rotate(-13.47deg);
-}
-
-
-/* Fillimisht fshehim të dy fotot */
-.first-img,
-.second-img {
-  opacity: 0;
-  transition: all 1s ease;
-}
-
-/* Foto e parë vjen prej krejt lart (jashtë seksionit) */
-.first-img {
-  transform: translateY(-200%) rotate(11.99deg);
-}
-
-/* Foto e dytë vjen nga e djathta */
-.second-img {
-  transform: translateX(150px) rotate(-13.47deg);
-}
-
-/* Kur të vijë animacioni */
-.image-content.show .first-img,
-.image-content.show .second-img {
-  opacity: 1;
-}
-
-/* Foto e parë shkon në vendin e vet */
-.image-content.show .first-img {
-  transform: translateY(0) rotate(11.99deg);
-}
-
-/* Foto e dytë shkon në vendin e vet */
-.image-content.show .second-img {
-  transform: translateX(0) rotate(-13.47deg);
-}
-@media (max-width: 991px) {
-  .vizion-section p {
-    font-size: 16px !important; /* zvogëlo tekstin për mobile/tablet */
+/* === Animacionet vetëm për desktop === */
+@media (min-width: 992px) {
+  .text-content,
+  .image-content {
+    opacity: 0;
+    transition: all 0.8s ease;
   }
 
-  .vizion-section h2 {
-    font-size: 22px !important; /* nëse dëshiron, mund ta zvogëlosh edhe titullin */
+  .text-content {
+    transform: translateX(-100px);
+  }
+
+  .image-content {
+    transform: translateX(100px);
+  }
+
+  .text-content.show,
+  .image-content.show {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  /* Foto animacion */
+  .first-img,
+  .second-img {
+    opacity: 0;
+    transition: all 1s ease;
+  }
+
+  .first-img {
+    transform: translateY(-200%) rotate(11.99deg);
+  }
+
+  .second-img {
+    transform: translateX(150px) rotate(-13.47deg);
+  }
+
+  .image-content.show .first-img,
+  .image-content.show .second-img {
+    opacity: 1;
+  }
+
+  .image-content.show .first-img {
+    transform: translateY(0) rotate(11.99deg);
+  }
+
+  .image-content.show .second-img {
+    transform: translateX(0) rotate(-13.47deg);
   }
 }
-
-
 </style>
-
 
 <script>
   const vizionSection = document.querySelector('.vizion-section');
@@ -761,14 +713,22 @@
   const imageContent = document.querySelector('.image-content');
   let alreadyAnimated = false;
 
-  vizionSection.addEventListener('mouseenter', () => {
-    if (!alreadyAnimated) {
-      textContent.classList.add('show');
-      imageContent.classList.add('show');
-      alreadyAnimated = true;
-    }
-  });
+  // Vetëm në desktop (>= 992px)
+  if (window.innerWidth >= 992) {
+    vizionSection.addEventListener('mouseenter', () => {
+      if (!alreadyAnimated) {
+        textContent.classList.add('show');
+        imageContent.classList.add('show');
+        alreadyAnimated = true;
+      }
+    });
+  } else {
+    // Në telefon e tablet shfaqen menjëherë pa animacion
+    textContent.classList.add('show');
+    imageContent.classList.add('show');
+  }
 </script>
+
 <p></p>
 <!-- Google Font -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
@@ -797,107 +757,79 @@ body {
   background-color: #f6f6f6;
 }
 
-.img-tilted,
-.animate-right {
-  opacity: 0;
-  transition: all 0.8s ease-out;
+/* Animacionet vetem ne desktop */
+@media (min-width: 992px) {
+  .img-tilted,
+  .animate-right {
+    opacity: 0;
+    transition: all 0.8s ease-out;
+  }
+
+  .img-tilted {
+    width: 300px;
+    height: 400px;
+    position: relative;
+    left: -40px;
+    border-radius: 38px;
+    box-shadow: -20px 0 30px rgba(0, 0, 0, 0.705), 20px 0 30px rgba(0, 0, 0, 0.15);
+    object-fit: cover;
+    transform: translateY(-100px) rotate(11.99deg);
+    z-index: 2;
+  }
+
+  .animate-right {
+    transform: translateX(100px);
+  }
+
+  .img-tilted.show {
+    opacity: 1;
+    transform: translateY(0) rotate(11.99deg);
+  }
+
+  .animate-right.show {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
-.img-tilted {
-  width: 300px;
-  height: 400px;
-  position: relative;
-  left: -40px; /* ruajmë pozicionin për desktop */
-  border-radius: 38px;
+/* Mobile/Tablet - pa animacion */
+@media (max-width: 991px) {
+  .img-tilted,
+  .animate-right {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
 
-  /* Hijet anash majtas-djathtas */
-  box-shadow: -20px 0 30px rgba(0, 0, 0, 0.705), 20px 0 30px rgba(0, 0, 0, 0.15);
-
-  object-fit: cover;
-  transform: translateY(-100px) rotate(11.99deg);
-  z-index: 2;
-}
-
-.animate-right {
-  transform: translateX(100px);
-}
-
-.img-tilted.show {
-  opacity: 1;
-  transform: translateY(0) rotate(11.99deg);
-}
-
-.animate-right.show {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-.mission-text {
-  font-size: 20px;
-  line-height: 1.9;
-  max-width: 700px;
-  color: #000;
-}
-
-.mission-section h2 {
-  font-size: 32px;
-  margin-bottom: 24px;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
   .img-tilted {
     width: 240px;
     height: 320px;
-    left: 0; /* largojmë left -40px për të qenë në qendër */
-    transform: translateY(0) rotate(11.99deg); /* ruajmë rotacionin, heqim translateY negative */
-    margin-top: 20px; /* vendosim pak hapësirë mbi foto */
+    left: 0;
+    margin-top: 20px;
+    border-radius: 28px;
+    transform: rotate(11.99deg) !important;
   }
 
   .mission-text {
-    font-size: 18px;
-    max-width: 100%;
-    line-height: 1.8;
+    font-size: 16px;
+    line-height: 1.6;
   }
 
   .mission-section h2 {
-    font-size: 28px;
+    font-size: 24px;
     margin-bottom: 20px;
   }
-}
 
-
-@media (max-width: 768px) {
-  /* ... stilat ekzistues ... */
-
-  /* Rendisja e kolonave: teksti para imazhit */
-  #missionSection .col-lg-5 {  /* kolona e imazhit */
-    order: 2;  /* e vendosim si e dyta */
-    margin-top: 20px; /* pak hapësirë nga teksti */
-    left: 0 !important; /* për siguri largoj pozicionimin */
-    transform: translateY(0) rotate(11.99deg) !important; /* ruaj rotacionin */
-    width: 240px !important;
-    height: 320px !important;
+  /* Renditja: teksti para imazhit */
+  #missionSection .col-lg-5 {
+    order: 2;
+    margin-top: 20px;
   }
 
-  #missionSection .col-lg-6 {  /* kolona e tekstit */
-    order: 1; /* e vendosim e para */
+  #missionSection .col-lg-6 {
+    order: 1;
   }
 }
-
-@media (max-width: 768px) {
-  /* Zvogëlo madhësinë e titullit */
-  .mission-section h2 {
-    font-size: 24px; /* nga 32px në 24px */
-  }
-
-  /* Zvogëlo madhësinë e paragrafit */
-  .mission-text {
-    font-size: 16px; /* nga 20px në 16px */
-    line-height: 1.6; /* pak më kompak */
-  }
-}
-
 </style>
 
 <script>
@@ -908,16 +840,25 @@ body {
     const title = document.getElementById('missionTitle');
     let alreadyAnimated = false;
 
-    section.addEventListener('mouseenter', () => {
-      if (!alreadyAnimated) {
-        img.classList.add('show');
-        text.classList.add('show');
-        title.classList.add('show');
-        alreadyAnimated = true;
-      }
-    });
+    if (window.innerWidth >= 992) {
+      // Vetëm në desktop aktivizohet animacioni
+      section.addEventListener('mouseenter', () => {
+        if (!alreadyAnimated) {
+          img.classList.add('show');
+          text.classList.add('show');
+          title.classList.add('show');
+          alreadyAnimated = true;
+        }
+      });
+    } else {
+      // Në telefon/tablet, shfaqen direkt pa animacion
+      img.classList.add('show');
+      text.classList.add('show');
+      title.classList.add('show');
+    }
   });
 </script>
+
 
 <p></p>
 <!-- Google Font -->

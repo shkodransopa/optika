@@ -472,7 +472,7 @@
     <!-- Menu desktop -->
     <div class="collapse navbar-collapse justify-content-center d-none d-lg-flex" id="navbarMenu">
       <ul class="navbar-nav mb-2 mb-lg-0 gap-4">
-        <li class="nav-item"><a class="nav-link text-dark" href="index.html">Ballina</a></li>
+        <li class="nav-item"><a class="nav-link text-dark" href="Index.html">Ballina</a></li>
         <li class="nav-item"><a class="nav-link text-dark" href="rrethnesh.html">Rreth nesh</a></li>
         <li class="nav-item"><a class="nav-link text-dark" href="Test.html">Shërbimet</a></li>
         <li class="nav-item"><a class="nav-link text-dark" href="Ballina.html">Syzet dhe markat</a></li>
@@ -525,12 +525,10 @@
 
 
 
+<!-- FOTO E BALLINËS -->
+<img class="hero-image" src="./Img/ballina.png" alt="Foto e Ballinës" style="width: 100%; height: auto; display: block;" />
 
-
-  <!-- FOTO E BALLINËS -->
-  <img class="hero-image" src="./Img/ballina.png" alt="Foto e Ballinës" style="width: 100%; height: auto; display: block;" />
-
-  <!-- Pjesa tjetër e faqes... -->
+<!-- Pjesa tjetër e faqes... -->
 
 <section class="animated-collection">
   <div class="hover-zone" id="hoverZone">
@@ -576,11 +574,8 @@
   </div>
 </section>
 
-
-
-
 <style>
-  /* Kutia me hover */
+/* Kutia me hover */
 .hover-zone {
   display: flex;
   gap: 30px;
@@ -705,20 +700,25 @@
   background-image: url('./Img/Tommy.jpg');
 }
 
-
-
-
+/* Për telefona dhe tableta */
 @media (max-width: 768px) {
   .box {
     width: 100%;
     height: auto;
     flex-direction: column !important;
+
+    /* Heq animacionet në mobile */
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    pointer-events: auto !important;
   }
 
   /* Tommy & Lacoste të kenë imazhin sipër, tekstin poshtë */
   .box.from-right {
     flex-direction: column-reverse !important;
-  }  .box.box.from-left {
+  }
+  .box.from-left {
     flex-direction: column-reverse !important;
   }
 
@@ -748,27 +748,23 @@
     margin-top: 15px;
   }
 }
-
-
-
-
-
-
 </style>
 
-
-
-
-
-
-
 <script>
-  // Kur vendoset mausi mbi hover-zone, shfaq kutitë vetëm herën e parë
-  const hoverZone = document.getElementById('hoverZone');
-  const box1 = document.getElementById('box1');
-  const box2 = document.getElementById('box2');
-  let alreadyShown = false;
+const hoverZone = document.getElementById('hoverZone');
+const box1 = document.getElementById('box1');
+const box2 = document.getElementById('box2');
+let alreadyShown = false;
 
+// kontrollo nese jemi ne mobile apo desktop
+const isMobile = window.innerWidth <= 768;
+
+if (isMobile) {
+  // në telefon shfaq direkt pa animacion
+  box1.classList.add('show');
+  box2.classList.add('show');
+} else {
+  // në desktop vetëm kur hyn me mouse
   hoverZone.addEventListener('mouseenter', () => {
     if (!alreadyShown) {
       box1.classList.add('show');
@@ -776,6 +772,7 @@
       alreadyShown = true;
     }
   });
+}
 </script>
 
 
@@ -829,25 +826,22 @@
     color: white;
   }
 
-  /* Kur aktivizohet sfondi me scale dhe opacity */
+  /* Kur aktivizohet animacioni */
   .optika-section.active .optika-content-wrapper {
     opacity: 1;
     transform: scale(1);
     pointer-events: auto;
   }
 
-  /* Teksti fshehur fillimisht, me pozicion me lart */
   .optika-content {
     text-align: center;
     padding: 40px;
     color: white;
-
     opacity: 0;
     transform: translateY(-20px);
     transition: opacity 0.8s ease, transform 0.8s ease;
   }
 
-  /* Kur aktivizohet, teksti shfaqet me rrëshqitje */
   .optika-section.active .optika-content {
     opacity: 1;
     transform: translateY(0);
@@ -867,6 +861,7 @@
     margin: 0 auto;
   }
 
+  /* Responsive */
   @media (max-width: 768px) {
     .optika-content {
       padding: 30px;
@@ -881,68 +876,57 @@
     }
   }
 
-
   @media (max-width: 700px) {
-  .optika-content-wrapper {
-    width: 100%; /* Përdor tërë gjerësinë */
-    height: auto; /* lartësi fleksibël */
-    background-position: center;
-    padding: 30px 15px;
+    .optika-section {
+      height: auto;
+      padding: 20px 0;
+    }
+
+    .optika-content-wrapper {
+      width: 100%;
+      height: auto;
+      background-position: center;
+      padding: 30px 15px;
+      opacity: 1 !important;       /* gjithmonë e dukshme */
+      transform: scale(1) !important; /* pa animacion */
+      pointer-events: auto;
+    }
+
+    .optika-content {
+      opacity: 1 !important;
+      transform: translateY(0) !important;
+    }
+
+    .optika-text {
+      font-size: 14px;
+      max-width: 100%;
+      line-height: 1.4;
+    }
+
+    .optika-title {
+      font-size: 20px;
+    }
   }
-
-  .optika-text {
-    font-size: 14px;
-    max-width: 100%;
-    line-height: 1.4;
-  }
-
-  .optika-title {
-    font-size: 20px;
-  }
-}
-
-
-
-
-.optika-content-wrapper {
-  opacity: 0;
-  transform: scale(0.5);
-  transition: opacity 0.8s ease, transform 0.8s ease;
-  pointer-events: none;
-  /* të tjera po ashtu */
-}
-
-.optika-section.active .optika-content-wrapper {
-  opacity: 1;
-  transform: scale(1);
-  pointer-events: auto;
-}
-
-.optika-content {
-  opacity: 0;
-  transform: translateY(-100%);
-  transition: opacity 0.8s ease, transform 0.8s ease;
-}
-
-.optika-section.active .optika-content {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-  
 </style>
 
 <script>
   const optikaSection = document.getElementById('optikaSection');
   let alreadyActivated = false;
 
-  optikaSection.addEventListener('mouseenter', () => {
-    if (!alreadyActivated) {
-      optikaSection.classList.add('active');
-      alreadyActivated = true;
-    }
-  });
+  // vetem per desktop (ekran > 768px) me hover animacion
+  if (window.innerWidth > 768) {
+    optikaSection.addEventListener('mouseenter', () => {
+      if (!alreadyActivated) {
+        optikaSection.classList.add('active');
+        alreadyActivated = true;
+      }
+    });
+  } else {
+    // ne telefon - direkt aktiv pa animacion
+    optikaSection.classList.add('active');
+  }
 </script>
+
 
 <section class="container py-5">
   <div class="row justify-content-center g-4">
